@@ -1,5 +1,6 @@
 @import "@fontsource-variable/inter/standard.css";
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* ============================================================================
    Tailwind v4 — dark-mode strategy + content scan

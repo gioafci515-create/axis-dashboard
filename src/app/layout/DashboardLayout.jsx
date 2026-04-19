@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import MobileDrawer from "./MobileDrawer";
+import { Toaster } from "@/components/ui/Toast";
+import { TooltipProvider } from "@/components/ui/Tooltip";
 
 const STORAGE_KEY = "tailadmin-sidebar-collapsed";
 
@@ -20,6 +22,7 @@ export default function DashboardLayout() {
   }, [collapsed]);
 
   return (
+    <TooltipProvider delayDuration={200}>
     <div className="min-h-screen flex bg-[var(--bg-app)] text-[var(--text-primary)]">
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed((v) => !v)} />
       <MobileDrawer open={mobileOpen} onOpenChange={setMobileOpen} />
@@ -41,6 +44,8 @@ export default function DashboardLayout() {
           </AnimatePresence>
         </main>
       </div>
+      <Toaster />
     </div>
+    </TooltipProvider>
   );
 }
