@@ -1,0 +1,339 @@
+@import "@fontsource-variable/inter/standard.css";
+@import "tailwindcss";
+
+/* ============================================================================
+   Tailwind v4 — dark-mode strategy + content scan
+   ========================================================================== */
+@custom-variant dark (&:where(.dark, .dark *));
+@source "./**/*.{js,jsx,ts,tsx}";
+
+/* ============================================================================
+   Design tokens — colors, radii, shadows, typography
+   ========================================================================== */
+:root {
+  /* Brand — indigo-blue (#465FFF primary) */
+  --brand-25:  #F2F7FF;
+  --brand-50:  #ECF3FF;
+  --brand-100: #DDE9FF;
+  --brand-200: #C2D6FF;
+  --brand-300: #9CB9FF;
+  --brand-400: #7592FF;
+  --brand-500: #465FFF;
+  --brand-600: #3641F5;
+  --brand-700: #2A31D8;
+  --brand-800: #252DAE;
+  --brand-900: #252B7A;
+  --brand-950: #162064;
+
+  /* Gray — warm */
+  --gray-25:   #FCFCFD;
+  --gray-50:   #F9FAFB;
+  --gray-100:  #F2F4F7;
+  --gray-200:  #E4E7EC;
+  --gray-300:  #D0D5DD;
+  --gray-400:  #98A2B3;
+  --gray-500:  #667085;
+  --gray-600:  #475467;
+  --gray-700:  #344054;
+  --gray-800:  #1D2939;
+  --gray-900:  #101828;
+  --gray-950:  #0C111D;
+
+  /* Semantic */
+  --success-500: #12B76A;
+  --success-50:  #ECFDF3;
+  --warning-500: #F79009;
+  --warning-50:  #FFFAEB;
+  --error-500:   #F04438;
+  --error-50:    #FEF3F2;
+  --info-500:    #2E90FA;
+  --info-50:     #EFF8FF;
+
+  /* Dark surface layers */
+  --dark-bg:       #0C111D;
+  --dark-surface:  #101828;
+  --dark-elevated: #1D2939;
+  --dark-border:   #1F2937;
+
+  /* Radii */
+  --radius-sm:  6px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 20px;
+
+  /* Shadows */
+  --shadow-xs:    0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-sm:    0 1px 3px rgba(16, 24, 40, 0.10), 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-md:    0 4px 8px -2px rgba(16, 24, 40, 0.10), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+  --shadow-lg:    0 12px 16px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03);
+  --shadow-focus: 0 0 0 4px rgba(70, 95, 255, 0.12);
+
+  /* Chart palette */
+  --chart-1: #465FFF;
+  --chart-2: #12B76A;
+  --chart-3: #F79009;
+  --chart-4: #2E90FA;
+  --chart-5: #F04438;
+  --chart-6: #7592FF;
+  --chart-7: #98A2B3;
+  --chart-8: #1D2939;
+
+  /* App-level semantic bindings — light mode defaults */
+  --bg-app:        var(--gray-50);
+  --bg-surface:    #FFFFFF;
+  --bg-elevated:   #FFFFFF;
+  --bg-muted:      var(--gray-100);
+  --bg-hover:      var(--gray-50);
+  --border:        var(--gray-200);
+  --border-strong: var(--gray-300);
+  --text-primary:   var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-tertiary:  var(--gray-500);
+  --text-muted:     var(--gray-400);
+}
+
+/* Dark mode remaps */
+.dark {
+  --bg-app:        var(--dark-bg);
+  --bg-surface:    var(--dark-surface);
+  --bg-elevated:   var(--dark-elevated);
+  --bg-muted:      var(--dark-surface);
+  --bg-hover:      var(--dark-elevated);
+  --border:        var(--dark-border);
+  --border-strong: var(--gray-700);
+  --text-primary:   var(--gray-25);
+  --text-secondary: var(--gray-300);
+  --text-tertiary:  var(--gray-400);
+  --text-muted:     var(--gray-500);
+  --shadow-xs:    0 1px 2px rgba(0, 0, 0, 0.40);
+  --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.40), 0 1px 2px rgba(0, 0, 0, 0.30);
+  --shadow-md:    0 4px 8px -2px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.30);
+  --shadow-lg:    0 12px 16px -4px rgba(0, 0, 0, 0.50), 0 4px 6px -2px rgba(0, 0, 0, 0.30);
+}
+
+/* ============================================================================
+   Tailwind @theme inline — expose tokens as utility colors, radii, shadows
+   ========================================================================== */
+@theme inline {
+  --color-brand-25:  var(--brand-25);
+  --color-brand-50:  var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+
+  --color-gray-25:  var(--gray-25);
+  --color-gray-50:  var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-gray-950: var(--gray-950);
+
+  --color-success-50:  var(--success-50);
+  --color-success-500: var(--success-500);
+  --color-warning-50:  var(--warning-50);
+  --color-warning-500: var(--warning-500);
+  --color-error-50:    var(--error-50);
+  --color-error-500:   var(--error-500);
+  --color-info-50:     var(--info-50);
+  --color-info-500:    var(--info-500);
+
+  --color-dark-bg:       var(--dark-bg);
+  --color-dark-surface:  var(--dark-surface);
+  --color-dark-elevated: var(--dark-elevated);
+  --color-dark-border:   var(--dark-border);
+
+  /* Semantic aliases */
+  --color-app:          var(--bg-app);
+  --color-surface:      var(--bg-surface);
+  --color-elevated:     var(--bg-elevated);
+  --color-muted:        var(--bg-muted);
+  --color-border-base:  var(--border);
+  --color-border-strong:var(--border-strong);
+  --color-fg-primary:   var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-tertiary:  var(--text-tertiary);
+  --color-fg-muted:     var(--text-muted);
+
+  --radius-sm:  var(--radius-sm);
+  --radius-md:  var(--radius-md);
+  --radius-lg:  var(--radius-lg);
+  --radius-xl:  var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+
+  --shadow-xs:    var(--shadow-xs);
+  --shadow-sm:    var(--shadow-sm);
+  --shadow-md:    var(--shadow-md);
+  --shadow-lg:    var(--shadow-lg);
+  --shadow-focus: var(--shadow-focus);
+
+  --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+/* ============================================================================
+   Base element styles
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+[disabled] {
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   Scrollbar — refined
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray-200);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--dark-elevated);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-300);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-700);
+}
+
+/* ============================================================================
+   Focus — visible ring
+   ========================================================================== */
+*:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: 4px;
+}
+
+/* ============================================================================
+   Selection
+   ========================================================================== */
+::selection {
+  background-color: var(--brand-100);
+  color: var(--brand-800);
+}
+.dark ::selection {
+  background-color: rgba(70, 95, 255, 0.35);
+  color: var(--gray-25);
+}
+
+/* ============================================================================
+   Utilities
+   ========================================================================== */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.font-display {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  letter-spacing: -0.02em;
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+   Skeleton shimmer
+   ========================================================================== */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-100) 25%,
+    var(--gray-200) 50%,
+    var(--gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: 6px;
+}
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--dark-elevated) 25%,
+    #273449 50%,
+    var(--dark-elevated) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ============================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

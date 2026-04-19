@@ -1,0 +1,24 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DashboardLayout from "@/app/layout/DashboardLayout";
+import ComingSoon from "@/app/ComingSoon";
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<DashboardLayout />}>
+          <Route index element={<ComingSoon name="Marketing" />} />
+          <Route path="analytics" element={<ComingSoon name="Analytics" />} />
+          <Route path="ecommerce" element={<ComingSoon name="eCommerce" />} />
+          <Route path="calendar" element={<ComingSoon name="Calendar" />} />
+          <Route path="profile" element={<ComingSoon name="Profile" />} />
+          <Route path="tables" element={<ComingSoon name="Tables" />} />
+          <Route path="forms" element={<ComingSoon name="Forms" />} />
+          <Route path="signin" element={<ComingSoon name="Sign in" />} />
+          <Route path="signup" element={<ComingSoon name="Sign up" />} />
+          <Route path="*" element={<ComingSoon name="Not found" />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
