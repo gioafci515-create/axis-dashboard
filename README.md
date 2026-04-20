@@ -1,16 +1,43 @@
-# React + Vite
+# Axis — Admin & Analytics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern admin dashboard built with Vite + React 19, Tailwind v4, Radix UI, Recharts, and Framer Motion.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Marketing, Analytics, eCommerce dashboards with seeded mock data
+- Data tables (sort / search / pagination) via @tanstack/react-table
+- Forms, Calendar (month grid), Profile, Auth (Sign in / Sign up)
+- Command palette (⌘K)
+- Notifications popover with unread state
+- Light + dark mode (class strategy, persisted)
+- Responsive: desktop sidebar / mobile drawer
+- Full a11y: skip-to-content, aria-labels, focus rings, reduced-motion
 
-## React Compiler
+## Local dev
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Build
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run build
+npm run preview
+```
+
+## Deploy
+
+Zero-config deploy on Vercel — framework preset: **Vite**.
+Build command: `npm run build` · Output: `dist`
+
+## Routes
+
+- `/` — Marketing overview
+- `/analytics` · `/ecommerce` · `/calendar` · `/profile` · `/tables` · `/forms`
+- `/signin` · `/signup` (standalone, outside dashboard shell)
+
+## Stack
+
+React 19.2 · Vite 7 · Tailwind CSS v4 · Radix UI · cmdk · Recharts 3 · Framer Motion 12 · react-router 7 · @tanstack/react-table · date-fns · sonner · lucide-react
