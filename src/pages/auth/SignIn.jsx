@@ -9,7 +9,7 @@ export default function SignIn() {
   return (
     <AuthShell
       title="Welcome back"
-      subtitle="Sign in to your Axis workspace."
+      subtitle="Sign in to your kosha workspace."
       footer={
         <>
           Don't have an account?{" "}

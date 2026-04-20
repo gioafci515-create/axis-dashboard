@@ -1,4 +1,4 @@
-# Axis — Admin & Analytics Dashboard
+# kosha — Admin & Analytics Dashboard
 
 Modern admin dashboard built with Vite + React 19, Tailwind v4, Radix UI, Recharts, and Framer Motion.
 

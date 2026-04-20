@@ -28,7 +28,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                 transition={{ duration: 0.2 }}
                 className="font-semibold text-[15px] tracking-tight text-[var(--text-primary)]"
               >
-                Axis
+                kosha
               </motion.span>
             )}
           </AnimatePresence>
@@ -149,7 +149,7 @@ function UserCard({ collapsed }) {
               Giorgi A.
             </p>
             <p className="text-[11.5px] text-[var(--text-tertiary)] truncate">
-              admin@axis.app
+              admin@kosha.app
             </p>
           </motion.div>
         )}

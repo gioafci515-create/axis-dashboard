@@ -46,7 +46,7 @@ export default function Profile() {
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-[var(--text-secondary)]">
               <span className="inline-flex items-center gap-1.5"><Mail className="size-3.5 text-[var(--text-tertiary)]" /> afciaurigiorgi046@gmail.com</span>
               <span className="inline-flex items-center gap-1.5"><MapPin className="size-3.5 text-[var(--text-tertiary)]" /> Tbilisi, Georgia</span>
-              <span className="inline-flex items-center gap-1.5"><Globe className="size-3.5 text-[var(--text-tertiary)]" /> axis.app</span>
+              <span className="inline-flex items-center gap-1.5"><Globe className="size-3.5 text-[var(--text-tertiary)]" /> kosha.app</span>
               <span className="inline-flex items-center gap-1.5"><Github className="size-3.5 text-[var(--text-tertiary)]" /> @giorgi</span>
               <span className="inline-flex items-center gap-1.5"><Twitter className="size-3.5 text-[var(--text-tertiary)]" /> @giorgi_a</span>
               <span className="inline-flex items-center gap-1.5"><Linkedin className="size-3.5 text-[var(--text-tertiary)]" /> /in/giorgi</span>

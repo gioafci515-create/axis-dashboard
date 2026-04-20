@@ -35,7 +35,7 @@ export default function MobileDrawer({ open, onOpenChange }) {
                       <Zap className="size-4 text-white" strokeWidth={2.5} />
                     </div>
                     <span className="font-semibold text-[15px] tracking-tight text-[var(--text-primary)]">
-                      Axis
+                      kosha
                     </span>
                   </div>
                   <Dialog.Close asChild>

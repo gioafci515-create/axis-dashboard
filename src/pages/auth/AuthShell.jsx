@@ -14,7 +14,7 @@ export function AuthShell({ title, subtitle, children, footer }) {
           <div className="size-9 rounded-[var(--radius-md)] bg-brand-500 grid place-items-center shadow-sm">
             <Zap className="size-4 text-white" strokeWidth={2.5} />
           </div>
-          <span className="font-semibold text-[17px] tracking-tight">Axis</span>
+          <span className="font-semibold text-[17px] tracking-tight">kosha</span>
         </div>
 
         <div className="w-full max-w-[400px]">

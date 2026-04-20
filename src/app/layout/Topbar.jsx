@@ -143,7 +143,7 @@ function UserMenu() {
       <DropdownContent align="end" className="min-w-[220px]">
         <div className="px-2.5 py-2.5 border-b border-[var(--border)] mb-1">
           <p className="text-[13px] font-medium text-[var(--text-primary)]">Giorgi Afciauri</p>
-          <p className="text-[11.5px] text-[var(--text-tertiary)] truncate">admin@axis.app</p>
+          <p className="text-[11.5px] text-[var(--text-tertiary)] truncate">admin@kosha.app</p>
         </div>
         <DropdownLabel>Account</DropdownLabel>
         <DropdownItem onSelect={() => navigate("/profile")}>
@@ -171,7 +171,7 @@ function Breadcrumbs({ pathname }) {
   return (
     <nav aria-label="Breadcrumb" className="hidden sm:flex items-center gap-1.5 text-[13px] min-w-0">
       <Link to="/" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">
-        Axis
+        kosha
       </Link>
       <ChevronRight className="size-3.5 text-[var(--text-muted)] shrink-0" />
       <span className="font-medium text-[var(--text-primary)] truncate">{current}</span>
