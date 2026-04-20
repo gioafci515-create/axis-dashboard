@@ -122,7 +122,7 @@ export default function Forms() {
             <div className="flex items-center gap-3 text-[13px]">
               <Checkbox id="tos" defaultChecked />
               <label htmlFor="tos" className="text-[var(--text-secondary)]">
-                I agree to the <a className="text-brand-500 underline-offset-2 hover:underline">terms of service</a>
+                I agree to the <button type="button" className="text-brand-500 underline-offset-2 hover:underline">terms of service</button>
               </label>
             </div>
 

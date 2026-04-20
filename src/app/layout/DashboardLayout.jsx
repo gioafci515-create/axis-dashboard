@@ -24,12 +24,18 @@ export default function DashboardLayout() {
   return (
     <TooltipProvider delayDuration={200}>
     <div className="min-h-screen flex bg-[var(--bg-app)] text-[var(--text-primary)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-3 focus:py-2 focus:rounded-[var(--radius-md)] focus:bg-brand-500 focus:text-white focus:text-[13px] focus:font-medium"
+      >
+        Skip to content
+      </a>
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed((v) => !v)} />
       <MobileDrawer open={mobileOpen} onOpenChange={setMobileOpen} />
 
       <div className="flex-1 min-w-0 flex flex-col">
         <Topbar onOpenMobileNav={() => setMobileOpen(true)} />
-        <main className="flex-1 min-w-0">
+        <main id="main-content" className="flex-1 min-w-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}

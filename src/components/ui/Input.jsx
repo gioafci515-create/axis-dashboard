@@ -15,6 +15,7 @@ export const Input = forwardRef(function Input(
       <input
         ref={ref}
         type={type}
+        aria-invalid={error || undefined}
         className={cn(
           "block w-full h-9 rounded-[var(--radius-md)] border bg-[var(--bg-surface)] px-3 text-[13.5px]",
           "text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]",
@@ -43,6 +44,7 @@ export function Textarea({ className, error, rows = 4, ...props }) {
   return (
     <textarea
       rows={rows}
+      aria-invalid={error || undefined}
       className={cn(
         "block w-full rounded-[var(--radius-md)] border bg-[var(--bg-surface)] px-3 py-2 text-[13.5px]",
         "text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]",

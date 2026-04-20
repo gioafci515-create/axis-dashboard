@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, Globe, Github, Twitter, Linkedin, Pencil } from "lucide-react";
+import { Mail, MapPin, Globe, Github, Twitter, Linkedin, Pencil, AtSign, Eye } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardBody } from "@/components/ui/Card";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
@@ -116,15 +116,27 @@ export default function Profile() {
                 </ul>
               </TabsContent>
               <TabsContent value="mentions">
-                <p className="py-10 text-center text-[13px] text-[var(--text-tertiary)]">No mentions yet.</p>
+                <EmptyState icon={AtSign} title="No mentions yet" hint="When someone @mentions you, it'll show up here." />
               </TabsContent>
               <TabsContent value="reviews">
-                <p className="py-10 text-center text-[13px] text-[var(--text-tertiary)]">No reviews yet.</p>
+                <EmptyState icon={Eye} title="No reviews yet" hint="Reviews you give or receive will appear here." />
               </TabsContent>
             </Tabs>
           </div>
         </Card>
       </motion.section>
     </motion.div>
+  );
+}
+
+function EmptyState({ icon: Icon, title, hint }) {
+  return (
+    <div className="py-10 flex flex-col items-center text-center gap-2">
+      <div className="size-10 rounded-full bg-[var(--bg-muted)] grid place-items-center text-[var(--text-tertiary)]">
+        <Icon className="size-4.5" />
+      </div>
+      <p className="text-[13.5px] font-medium text-[var(--text-secondary)]">{title}</p>
+      <p className="text-[12.5px] text-[var(--text-tertiary)] max-w-[280px]">{hint}</p>
+    </div>
   );
 }

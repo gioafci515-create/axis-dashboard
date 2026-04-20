@@ -29,29 +29,29 @@ export default function SignUp() {
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <Label required>First name</Label>
-            <Input placeholder="Giorgi" leftIcon={<User />} />
+            <Label htmlFor="signup-first" required>First name</Label>
+            <Input id="signup-first" name="firstName" autoComplete="given-name" placeholder="Giorgi" leftIcon={<User />} />
           </div>
           <div>
-            <Label>Last name</Label>
-            <Input placeholder="Afciauri" />
+            <Label htmlFor="signup-last">Last name</Label>
+            <Input id="signup-last" name="lastName" autoComplete="family-name" placeholder="Afciauri" />
           </div>
         </div>
         <div>
-          <Label required>Work email</Label>
-          <Input type="email" placeholder="you@company.com" leftIcon={<Mail />} />
+          <Label htmlFor="signup-email" required>Work email</Label>
+          <Input id="signup-email" name="email" type="email" autoComplete="email" placeholder="you@company.com" leftIcon={<Mail />} />
         </div>
         <div>
-          <Label required>Password</Label>
-          <Input type="password" placeholder="At least 10 characters" leftIcon={<Lock />} />
+          <Label htmlFor="signup-password" required>Password</Label>
+          <Input id="signup-password" name="password" type="password" autoComplete="new-password" placeholder="At least 10 characters" leftIcon={<Lock />} />
           <HelperText>Use a mix of letters, numbers, and symbols.</HelperText>
         </div>
         <label className="flex items-start gap-2 text-[13px] text-[var(--text-secondary)]">
           <Checkbox className="mt-0.5" defaultChecked />
           <span>
             I agree to the{" "}
-            <a className="text-brand-500 hover:underline">terms</a> and{" "}
-            <a className="text-brand-500 hover:underline">privacy policy</a>.
+            <button type="button" className="text-brand-500 hover:underline">terms</button> and{" "}
+            <button type="button" className="text-brand-500 hover:underline">privacy policy</button>.
           </span>
         </label>
         <Button type="submit" variant="primary" className="w-full" size="lg">

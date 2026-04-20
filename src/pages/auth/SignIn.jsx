@@ -28,15 +28,15 @@ export default function SignIn() {
           <span className="relative bg-[var(--bg-app)] px-2 text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">or</span>
         </div>
         <div>
-          <Label>Email</Label>
-          <Input type="email" placeholder="you@company.com" leftIcon={<Mail />} />
+          <Label htmlFor="signin-email">Email</Label>
+          <Input id="signin-email" name="email" type="email" autoComplete="email" placeholder="you@company.com" leftIcon={<Mail />} />
         </div>
         <div>
           <div className="flex items-baseline justify-between">
-            <Label>Password</Label>
-            <a className="text-[12px] text-brand-500 hover:underline cursor-pointer">Forgot?</a>
+            <Label htmlFor="signin-password">Password</Label>
+            <button type="button" className="text-[12px] text-brand-500 hover:underline cursor-pointer">Forgot?</button>
           </div>
-          <Input type="password" placeholder="••••••••" leftIcon={<Lock />} />
+          <Input id="signin-password" name="password" type="password" autoComplete="current-password" placeholder="••••••••" leftIcon={<Lock />} />
         </div>
         <label className="flex items-center gap-2 text-[13px] text-[var(--text-secondary)]">
           <Checkbox defaultChecked /> Remember me for 30 days

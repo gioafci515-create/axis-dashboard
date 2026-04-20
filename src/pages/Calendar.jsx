@@ -59,11 +59,11 @@ export default function CalendarPage() {
           <p className="mt-1 text-[14px] text-[var(--text-tertiary)]">Your schedule at a glance.</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="icon-sm" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}>
+          <Button variant="outline" size="icon-sm" aria-label="Previous month" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}>
             <ChevronLeft />
           </Button>
           <Button variant="outline" size="sm" onClick={() => setCursor(new Date())}>Today</Button>
-          <Button variant="outline" size="icon-sm" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}>
+          <Button variant="outline" size="icon-sm" aria-label="Next month" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}>
             <ChevronRight />
           </Button>
           <Button variant="primary" size="sm"><Plus className="size-3.5" /> Event</Button>
