@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronsLeft, Zap } from "lucide-react";
 import { cn } from "@/lib/cn";
@@ -125,7 +125,9 @@ function NavItem({ item, collapsed }) {
 
 function UserCard({ collapsed }) {
   return (
-    <div
+    <Link
+      to="/profile"
+      aria-label="Open profile"
       className={cn(
         "flex items-center gap-3 p-2 rounded-[var(--radius-md)] hover:bg-[var(--bg-hover)] transition-colors cursor-pointer",
         collapsed && "justify-center"
@@ -152,6 +154,6 @@ function UserCard({ collapsed }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </Link>
   );
 }

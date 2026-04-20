@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as Popover from "@radix-ui/react-popover";
 import { Command } from "cmdk";
 import {
   Search,
@@ -9,19 +10,54 @@ import {
   Bell,
   Menu,
   ChevronRight,
+  CheckCheck,
+  ShoppingBag,
+  UserPlus,
+  AlertTriangle,
+  MessageCircle,
+  GitMerge,
+  User,
+  Settings,
+  LogOut,
+  LifeBuoy,
 } from "lucide-react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownLabel,
+  DropdownSeparator,
+} from "@/components/ui/Dropdown";
 import { useTheme } from "@/hooks/useTheme";
 import { NAV_SECTIONS } from "./nav-config";
 import { cn } from "@/lib/cn";
 
-const ALL_NAV = NAV_SECTIONS.flatMap((s) =>
-  s.items.map((i) => ({ ...i, section: s.label }))
-);
+const NOTIFICATIONS_SEED = [
+  { id: "n1", icon: ShoppingBag, tone: "brand", title: "New order placed", desc: "Order #4821 from Lena Ortiz — $284.00", when: "2m ago", unread: true },
+  { id: "n2", icon: UserPlus, tone: "success", title: "New signup", desc: "Mark Chen joined the Pro plan.", when: "14m ago", unread: true },
+  { id: "n3", icon: AlertTriangle, tone: "warning", title: "Low stock", desc: "Aurora Hoodie — 3 units left.", when: "1h ago", unread: true },
+  { id: "n4", icon: MessageCircle, tone: "info", title: "New comment on #412", desc: "Sarah: \"Ship it after QA signoff.\"", when: "3h ago", unread: false },
+  { id: "n5", icon: GitMerge, tone: "brand", title: "PR merged", desc: "phase-7: a11y + polish merged to main.", when: "Yesterday", unread: false },
+];
+
+const TONE_BG = {
+  brand: "bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-300",
+  success: "bg-success-50 text-[var(--success-500)] dark:bg-success-500/15",
+  warning: "bg-warning-50 text-[var(--warning-500)] dark:bg-warning-500/15",
+  info: "bg-info-50 text-[var(--info-500)] dark:bg-info-500/15",
+  error: "bg-error-50 text-[var(--error-500)] dark:bg-error-500/15",
+};
 
 export default function Topbar({ onOpenMobileNav }) {
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [notifs, setNotifs] = useState(NOTIFICATIONS_SEED);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const unreadCount = notifs.filter((n) => n.unread).length;
+
+  const markAllRead = () => setNotifs((ns) => ns.map((n) => ({ ...n, unread: false })));
+  const markOneRead = (id) => setNotifs((ns) => ns.map((n) => (n.id === id ? { ...n, unread: false } : n)));
 
   useEffect(() => {
     const onKey = (e) => {
@@ -76,22 +112,55 @@ export default function Topbar({ onOpenMobileNav }) {
             {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </button>
 
-          <button
-            aria-label="Notifications"
-            className="relative size-9 grid place-items-center rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors"
-          >
-            <Bell className="size-4" />
-            <span className="absolute top-2 right-2 size-1.5 rounded-full bg-error-500 ring-2 ring-[var(--bg-surface)]" />
-          </button>
+          <NotificationsPopover
+            notifs={notifs}
+            unreadCount={unreadCount}
+            onMarkAll={markAllRead}
+            onMarkOne={markOneRead}
+          />
 
-          <div className="ml-1 size-9 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 grid place-items-center text-white text-[12px] font-semibold shadow-sm cursor-pointer">
-            GA
-          </div>
+          <UserMenu />
         </div>
       </header>
 
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
     </>
+  );
+}
+
+function UserMenu() {
+  const navigate = useNavigate();
+  return (
+    <Dropdown>
+      <DropdownTrigger asChild>
+        <button
+          aria-label="Account menu"
+          className="ml-1 size-9 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 grid place-items-center text-white text-[12px] font-semibold shadow-sm hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]"
+        >
+          GA
+        </button>
+      </DropdownTrigger>
+      <DropdownContent align="end" className="min-w-[220px]">
+        <div className="px-2.5 py-2.5 border-b border-[var(--border)] mb-1">
+          <p className="text-[13px] font-medium text-[var(--text-primary)]">Giorgi Afciauri</p>
+          <p className="text-[11.5px] text-[var(--text-tertiary)] truncate">admin@axis.app</p>
+        </div>
+        <DropdownLabel>Account</DropdownLabel>
+        <DropdownItem onSelect={() => navigate("/profile")}>
+          <User /> Profile
+        </DropdownItem>
+        <DropdownItem onSelect={() => navigate("/forms")}>
+          <Settings /> Settings
+        </DropdownItem>
+        <DropdownItem>
+          <LifeBuoy /> Help & support
+        </DropdownItem>
+        <DropdownSeparator />
+        <DropdownItem onSelect={() => navigate("/signin")} className="text-[var(--error-500)] data-[highlighted]:text-[var(--error-500)]">
+          <LogOut /> Sign out
+        </DropdownItem>
+      </DropdownContent>
+    </Dropdown>
   );
 }
 
@@ -119,6 +188,96 @@ function Kbd({ children }) {
     <kbd className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-[4px] border border-[var(--border)] bg-[var(--bg-surface)] font-mono text-[10px] text-[var(--text-tertiary)]">
       {children}
     </kbd>
+  );
+}
+
+function NotificationsPopover({ notifs, unreadCount, onMarkAll, onMarkOne }) {
+  return (
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <button
+          aria-label={unreadCount > 0 ? `Notifications, ${unreadCount} unread` : "Notifications"}
+          className="relative size-9 grid place-items-center rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors"
+        >
+          <Bell className="size-4" />
+          {unreadCount > 0 && (
+            <span className="absolute top-1.5 right-1.5 min-w-[15px] h-[15px] px-1 rounded-full bg-error-500 text-white text-[9.5px] font-bold tabular-nums grid place-items-center ring-2 ring-[var(--bg-surface)]">
+              {unreadCount}
+            </span>
+          )}
+        </button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          align="end"
+          sideOffset={8}
+          className="z-50 w-[min(92vw,380px)] rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-elevated)] shadow-lg overflow-hidden data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+        >
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)]">
+            <div className="flex items-center gap-2">
+              <h3 className="text-[14px] font-semibold text-[var(--text-primary)]">Notifications</h3>
+              {unreadCount > 0 && (
+                <span className="text-[10.5px] font-bold tabular-nums px-1.5 py-0.5 rounded-full bg-brand-50 text-brand-600 dark:bg-brand-500/15 dark:text-brand-300">
+                  {unreadCount} new
+                </span>
+              )}
+            </div>
+            <button
+              onClick={onMarkAll}
+              disabled={unreadCount === 0}
+              className="inline-flex items-center gap-1 text-[12px] font-medium text-brand-500 hover:text-brand-600 disabled:text-[var(--text-muted)] disabled:cursor-not-allowed"
+            >
+              <CheckCheck className="size-3.5" /> Mark all read
+            </button>
+          </div>
+
+          {notifs.length === 0 ? (
+            <div className="py-10 px-6 text-center">
+              <div className="size-10 mx-auto mb-2 rounded-full bg-[var(--bg-muted)] grid place-items-center text-[var(--text-tertiary)]">
+                <Bell className="size-4" />
+              </div>
+              <p className="text-[13px] font-medium text-[var(--text-secondary)]">You're all caught up</p>
+              <p className="text-[12px] text-[var(--text-tertiary)]">New activity will show up here.</p>
+            </div>
+          ) : (
+            <ul className="max-h-[360px] overflow-y-auto divide-y divide-[var(--border)]">
+              {notifs.map((n) => {
+                const Icon = n.icon;
+                return (
+                  <li key={n.id}>
+                    <button
+                      onClick={() => onMarkOne(n.id)}
+                      className="group w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-[var(--bg-hover)] transition-colors"
+                    >
+                      <div className={cn("size-8 shrink-0 rounded-[var(--radius-md)] grid place-items-center [&_svg]:size-3.5", TONE_BG[n.tone])}>
+                        <Icon strokeWidth={2.2} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline justify-between gap-2">
+                          <p className="text-[13px] font-medium text-[var(--text-primary)] truncate">{n.title}</p>
+                          <span className="text-[11px] text-[var(--text-tertiary)] shrink-0 tabular-nums">{n.when}</span>
+                        </div>
+                        <p className="text-[12.5px] text-[var(--text-tertiary)] line-clamp-2 mt-0.5">{n.desc}</p>
+                      </div>
+                      {n.unread && (
+                        <span className="mt-1.5 size-2 shrink-0 rounded-full bg-brand-500" aria-label="Unread" />
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+
+          <div className="px-4 py-2.5 border-t border-[var(--border)] bg-[var(--bg-app)]/50">
+            <button className="w-full text-[12.5px] font-medium text-brand-500 hover:text-brand-600 text-center">
+              View all notifications
+            </button>
+          </div>
+          <Popover.Arrow className="fill-[var(--bg-elevated)]" />
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 }
 
